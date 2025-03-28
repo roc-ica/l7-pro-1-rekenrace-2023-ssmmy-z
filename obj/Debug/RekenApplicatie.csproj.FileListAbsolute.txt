@@ -1,0 +1,42 @@
+C:\wamp64\www\School\Level 7\RekenApplicatie\bin\Debug\RekenApplicatie.exe.config
+C:\wamp64\www\School\Level 7\RekenApplicatie\bin\Debug\RekenApplicatie.exe
+C:\wamp64\www\School\Level 7\RekenApplicatie\bin\Debug\RekenApplicatie.pdb
+C:\wamp64\www\School\Level 7\RekenApplicatie\obj\Debug\RekenApplicatie.csproj.AssemblyReference.cache
+C:\wamp64\www\School\Level 7\RekenApplicatie\obj\Debug\MainWindow.baml
+C:\wamp64\www\School\Level 7\RekenApplicatie\obj\Debug\MainWindow.g.cs
+C:\wamp64\www\School\Level 7\RekenApplicatie\obj\Debug\App.g.cs
+C:\wamp64\www\School\Level 7\RekenApplicatie\obj\Debug\RekenApplicatie_MarkupCompile.cache
+C:\wamp64\www\School\Level 7\RekenApplicatie\obj\Debug\RekenApplicatie.g.resources
+C:\wamp64\www\School\Level 7\RekenApplicatie\obj\Debug\RekenApplicatie.Properties.Resources.resources
+C:\wamp64\www\School\Level 7\RekenApplicatie\obj\Debug\RekenApplicatie.csproj.GenerateResource.cache
+C:\wamp64\www\School\Level 7\RekenApplicatie\obj\Debug\RekenApplicatie.csproj.CoreCompileInputs.cache
+C:\wamp64\www\School\Level 7\RekenApplicatie\obj\Debug\RekenApplicatie.exe
+C:\wamp64\www\School\Level 7\RekenApplicatie\obj\Debug\RekenApplicatie.pdb
+C:\wamp64\www\School\Level 7\Reken Race\bin\Debug\RekenApplicatie.exe.config
+C:\wamp64\www\School\Level 7\Reken Race\bin\Debug\RekenApplicatie.exe
+C:\wamp64\www\School\Level 7\Reken Race\bin\Debug\RekenApplicatie.pdb
+C:\wamp64\www\School\Level 7\Reken Race\obj\Debug\RekenApplicatie.csproj.AssemblyReference.cache
+C:\wamp64\www\School\Level 7\Reken Race\obj\Debug\MainWindow.baml
+C:\wamp64\www\School\Level 7\Reken Race\obj\Debug\MainWindow.g.cs
+C:\wamp64\www\School\Level 7\Reken Race\obj\Debug\App.g.cs
+C:\wamp64\www\School\Level 7\Reken Race\obj\Debug\RekenApplicatie_MarkupCompile.cache
+C:\wamp64\www\School\Level 7\Reken Race\obj\Debug\RekenApplicatie.g.resources
+C:\wamp64\www\School\Level 7\Reken Race\obj\Debug\RekenApplicatie.Properties.Resources.resources
+C:\wamp64\www\School\Level 7\Reken Race\obj\Debug\RekenApplicatie.csproj.GenerateResource.cache
+C:\wamp64\www\School\Level 7\Reken Race\obj\Debug\RekenApplicatie.csproj.CoreCompileInputs.cache
+C:\wamp64\www\School\Level 7\Reken Race\obj\Debug\RekenApplicatie.exe
+C:\wamp64\www\School\Level 7\Reken Race\obj\Debug\RekenApplicatie.pdb
+C:\wamp64\www\School\School\Level 7\Reken Race\bin\Debug\RekenApplicatie.exe.config
+C:\wamp64\www\School\School\Level 7\Reken Race\bin\Debug\RekenApplicatie.exe
+C:\wamp64\www\School\School\Level 7\Reken Race\bin\Debug\RekenApplicatie.pdb
+C:\wamp64\www\School\School\Level 7\Reken Race\obj\Debug\RekenApplicatie.csproj.AssemblyReference.cache
+C:\wamp64\www\School\School\Level 7\Reken Race\obj\Debug\MainWindow.baml
+C:\wamp64\www\School\School\Level 7\Reken Race\obj\Debug\MainWindow.g.cs
+C:\wamp64\www\School\School\Level 7\Reken Race\obj\Debug\App.g.cs
+C:\wamp64\www\School\School\Level 7\Reken Race\obj\Debug\RekenApplicatie_MarkupCompile.cache
+C:\wamp64\www\School\School\Level 7\Reken Race\obj\Debug\RekenApplicatie.g.resources
+C:\wamp64\www\School\School\Level 7\Reken Race\obj\Debug\RekenApplicatie.Properties.Resources.resources
+C:\wamp64\www\School\School\Level 7\Reken Race\obj\Debug\RekenApplicatie.csproj.GenerateResource.cache
+C:\wamp64\www\School\School\Level 7\Reken Race\obj\Debug\RekenApplicatie.csproj.CoreCompileInputs.cache
+C:\wamp64\www\School\School\Level 7\Reken Race\obj\Debug\RekenApplicatie.exe
+C:\wamp64\www\School\School\Level 7\Reken Race\obj\Debug\RekenApplicatie.pdb

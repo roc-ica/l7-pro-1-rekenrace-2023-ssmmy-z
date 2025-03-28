@@ -1,0 +1,169 @@
+﻿<Window x:Class="RekenApplicatie.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Reken Race" Height="550" Width="800" 
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <!-- Custom button style -->
+        <Style x:Key="RoundedButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#de1c7e"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="8" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#c71970"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Custom textbox style -->
+        <Style x:Key="RoundedTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderBrush" Value="#de1c7e"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="8" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Custom combobox style -->
+        <Style x:Key="RoundedComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderBrush" Value="#de1c7e"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Padding" Value="8"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <!-- Background with subtle pattern overlay -->
+        <Grid.Background>
+            <VisualBrush TileMode="Tile" Viewport="0,0,40,40" ViewportUnits="Absolute">
+                <VisualBrush.Visual>
+                    <Grid Background="#f7f7f7">
+                        <Path Data="M0,0 L40,40 M40,0 L0,40" Stroke="#e8e8e8" StrokeThickness="1"/>
+                    </Grid>
+                </VisualBrush.Visual>
+            </VisualBrush>
+        </Grid.Background>
+
+        <!-- Main Border for content container -->
+        <Border CornerRadius="20" Margin="20" Background="White" 
+                BorderBrush="#de1c7e" BorderThickness="0,0,0,3">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="15" ShadowDepth="5" Opacity="0.2"/>
+            </Border.Effect>
+
+            <!-- Main Content -->
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <Grid>
+                    <!-- Title Banner -->
+                    <Border Height="70" VerticalAlignment="Top" Background="#de1c7e" CornerRadius="20,20,0,0">
+                        <TextBlock Text="Reken Race" FontWeight="Bold" FontSize="28" 
+                                   Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+
+                    <!-- Content Area -->
+                    <StackPanel Name="MainPanel" Margin="40,90,40,40" HorizontalAlignment="Center">
+                        <TextBlock x:Name="WelcomeText" Text="Welkom bij de Reken Race!" 
+                                   FontSize="22" FontWeight="Bold" Foreground="#333" 
+                                   Margin="0,0,0,20" TextAlignment="Center"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Left Column -->
+                            <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                                <TextBlock x:Name="NameLabel" Text="Voer je naam in:" 
+                                           FontSize="16" Foreground="#333" FontWeight="SemiBold"/>
+                                <TextBox x:Name="PlayerName" Style="{StaticResource RoundedTextBoxStyle}" 
+                                         Margin="0,5,0,15"/>
+                            </StackPanel>
+
+                            <!-- Right Column -->
+                            <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                                <TextBlock x:Name="DifficultyLabel" Text="Kies een moeilijkheidsgraad:" 
+                                           FontSize="16" Foreground="#333" FontWeight="SemiBold"/>
+                                <ComboBox x:Name="DifficultyLevel" Style="{StaticResource RoundedComboBoxStyle}" 
+                                          Margin="0,5,0,15">
+                                    <ComboBoxItem Content="Makkelijk"/>
+                                    <ComboBoxItem Content="Normaal"/>
+                                    <ComboBoxItem Content="Moeilijk"/>
+                                </ComboBox>
+                            </StackPanel>
+                        </Grid>
+
+                        <!-- Action Buttons -->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,20">
+                            <Button x:Name="HighscoreButton" Content="Bekijk Highscore" Width="180" 
+                                    Margin="5,0" Style="{StaticResource RoundedButtonStyle}"
+                                    Click="BekijkHighscore_Click"/>
+                            <Button x:Name="StartStopButton" Content="Start Oefening" Width="180" 
+                                    Margin="5,0" Style="{StaticResource RoundedButtonStyle}"
+                                    Click="StartStop_Click"/>
+                        </StackPanel>
+
+                        <!-- Quiz Area -->
+                        <Border x:Name="QuizArea" Background="#f9f9f9" CornerRadius="15" 
+                                BorderBrush="#e0e0e0" BorderThickness="1" Padding="20" Margin="0,0,0,10">
+                            <StackPanel>
+                                <!-- Question Image - Added new Image control -->
+                                <Image x:Name="QuestionImage" Width="150" Height="150" 
+                                       Margin="0,10,0,15" Stretch="Uniform"
+                                       Visibility="Collapsed" />
+
+                                <TextBlock x:Name="QuestionText" FontSize="18" Margin="0,5,0,15" 
+                                           Foreground="#333" TextWrapping="Wrap" TextAlignment="Center"/>
+
+                                <TextBox x:Name="AnswerBox" Style="{StaticResource RoundedTextBoxStyle}" 
+                                         Width="150" HorizontalAlignment="Center" 
+                                         FontSize="16" TextAlignment="Center"/>
+
+                                <Button x:Name="CheckAnswerButton" Content="Check Antwoord" Width="200" 
+                                        Margin="0,15,0,10" Style="{StaticResource RoundedButtonStyle}"
+                                        Click="CheckAnswer_Click"/>
+
+                                <TextBlock x:Name="FeedbackText" FontSize="18" Margin="0,10,0,5" 
+                                           Foreground="#333" TextWrapping="Wrap" TextAlignment="Center"/>
+
+                                <TextBlock x:Name="ScoreText" FontSize="18" Margin="0,5,0,5" 
+                                           Foreground="#333" TextWrapping="Wrap" TextAlignment="Center"
+                                           FontWeight="SemiBold"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Window>
