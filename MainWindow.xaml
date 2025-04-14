@@ -1,0 +1,324 @@
+﻿<Window x:Class="RekenApplicatie.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Reken Race" Height="600" Width="850" 
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <!-- Custom button style - Improved -->
+        <Style x:Key="RoundedButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#de1c7e"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="16,10"/>
+            <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="10" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#c71970"/>
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect BlurRadius="5" ShadowDepth="2" Opacity="0.3"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Secondary button style - Added for variety -->
+        <Style x:Key="SecondaryButtonStyle" TargetType="Button" BasedOn="{StaticResource RoundedButtonStyle}">
+            <Setter Property="Background" Value="#5b7db1"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#4a6a9a"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Custom textbox style - Improved -->
+        <Style x:Key="RoundedTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#333"/>
+            <Setter Property="BorderBrush" Value="#de1c7e"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="10" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="2"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="#c71970"/>
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect BlurRadius="4" ShadowDepth="1" Opacity="0.2"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Custom combobox style - Improved -->
+        <Style x:Key="RoundedComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#333"/>
+            <Setter Property="BorderBrush" Value="#de1c7e"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}" 
+                                    CornerRadius="10" 
+                                    BorderBrush="{TemplateBinding BorderBrush}" 
+                                    BorderThickness="{TemplateBinding BorderThickness}">
+                                <Grid>
+                                    <ToggleButton IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                  Focusable="false" Template="{DynamicResource ComboBoxToggleButton}"/>
+                                    <ContentPresenter Name="ContentSite" IsHitTestVisible="False" 
+                                                      Content="{TemplateBinding SelectionBoxItem}"
+                                                      ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                      ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                                      Margin="10,3,30,3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                    <TextBox x:Name="PART_EditableTextBox" 
+                                             Style="{x:Null}" Template="{DynamicResource ComboBoxTextBox}" 
+                                             HorizontalAlignment="Left" VerticalAlignment="Center" 
+                                             Margin="3,3,23,3" Focusable="True" 
+                                             Background="Transparent" Visibility="Hidden" 
+                                             IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                                    <Popup Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" 
+                                           AllowsTransparency="True" Focusable="False" PopupAnimation="Slide">
+                                        <Grid Name="DropDown" SnapsToDevicePixels="True" 
+                                              MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                            <Border x:Name="DropDownBorder" Background="White" CornerRadius="8" 
+                                                    BorderThickness="1" BorderBrush="#de1c7e">
+                                                <ScrollViewer SnapsToDevicePixels="True">
+                                                    <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                                </ScrollViewer>
+                                            </Border>
+                                        </Grid>
+                                    </Popup>
+                                </Grid>
+                            </Border>
+                            <Path Data="M0,0 L4,4 L8,0" Fill="#de1c7e" Stroke="#de1c7e" StrokeThickness="1"
+                                  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Template for combobox toggle button -->
+        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
+            <Grid Background="Transparent">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.ColumnSpan="2" Background="Transparent"/>
+                <Border Grid.Column="1" Background="Transparent" Margin="1,1,1,1"/>
+                <Path Name="Arrow" Grid.Column="1" Fill="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </ControlTemplate>
+
+        <!-- Template for combobox textbox -->
+        <ControlTemplate x:Key="ComboBoxTextBox" TargetType="TextBox">
+            <Border Background="Transparent" Padding="3">
+                <ScrollViewer x:Name="PART_ContentHost" Margin="0"/>
+            </Border>
+        </ControlTemplate>
+
+        <!-- Section Title Style -->
+        <Style x:Key="SectionTitleStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#333"/>
+            <Setter Property="Margin" Value="0,10,0,5"/>
+        </Style>
+
+        <!-- Field Label Style -->
+        <Style x:Key="FieldLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#333"/>
+            <Setter Property="Margin" Value="0,5,0,5"/>
+        </Style>
+
+        <!-- Question Counter Style -->
+        <Style x:Key="QuestionCounterStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#5b7db1"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <!-- Background with subtle pattern overlay -->
+        <Grid.Background>
+            <VisualBrush TileMode="Tile" Viewport="0,0,40,40" ViewportUnits="Absolute">
+                <VisualBrush.Visual>
+                    <Grid Background="#f0f5ff">
+                        <Path Data="M0,0 L40,40 M40,0 L0,40" Stroke="#e0eaff" StrokeThickness="1"/>
+                    </Grid>
+                </VisualBrush.Visual>
+            </VisualBrush>
+        </Grid.Background>
+
+        <!-- Main Border for content container -->
+        <Border CornerRadius="22" Margin="25" Background="White" 
+                BorderBrush="#de1c7e" BorderThickness="0,0,0,4">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="18" ShadowDepth="6" Opacity="0.2"/>
+            </Border.Effect>
+
+            <!-- Main Content -->
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <Grid>
+                    <!-- Title Banner -->
+                    <Border Height="80" VerticalAlignment="Top" Background="#de1c7e" CornerRadius="22,22,0,0">
+                        <Grid>
+                            <TextBlock Text="Reken Race" FontWeight="Bold" FontSize="32" 
+                                       Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Content Area -->
+                    <StackPanel Name="MainPanel" Margin="40,100,40,40">
+                        <TextBlock x:Name="WelcomeText" Text="Welkom bij de Reken Race!" 
+                                   FontSize="24" FontWeight="Bold" Foreground="#333" 
+                                   Margin="0,0,0,25" TextAlignment="Center"/>
+
+                        <!-- Player Configuration Section -->
+                        <Border Background="#f7f9ff" CornerRadius="15" 
+                                BorderBrush="#e0e0e0" BorderThickness="1" Padding="25,20" Margin="0,0,0,25">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Left Column -->
+                                <StackPanel Grid.Column="0" Margin="0,0,15,0">
+                                    <TextBlock x:Name="NameLabel" Text="Voer je naam in:" 
+                                               Style="{StaticResource FieldLabelStyle}"/>
+                                    <TextBox x:Name="PlayerName" Style="{StaticResource RoundedTextBoxStyle}" 
+                                             Margin="0,5,0,0"/>
+                                </StackPanel>
+
+                                <!-- Right Column -->
+                                <StackPanel Grid.Column="1" Margin="15,0,0,0">
+                                    <TextBlock x:Name="DifficultyLabel" Text="Kies een moeilijkheidsgraad:" 
+                                               Style="{StaticResource FieldLabelStyle}"/>
+                                    <ComboBox x:Name="DifficultyLevel" Style="{StaticResource RoundedComboBoxStyle}" 
+                                              Margin="0,5,0,0" Height="42">
+                                        <ComboBoxItem Content="Makkelijk"/>
+                                        <ComboBoxItem Content="Normaal" IsSelected="True"/>
+                                        <ComboBoxItem Content="Moeilijk"/>
+                                    </ComboBox>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <!-- Action Buttons - Improved layout -->
+                        <Grid Margin="0,0,0,25">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button x:Name="StartStopButton" Grid.Column="0" Content="Start Oefening" Width="200" Height="50"
+                                    Style="{StaticResource RoundedButtonStyle}" FontSize="16"
+                                    HorizontalAlignment="Center" Click="StartStop_Click"/>
+
+                            <Button x:Name="HighscoreButton" Grid.Column="1" Content="Bekijk Highscore" Width="200" Height="50"
+                                    Style="{StaticResource SecondaryButtonStyle}" FontSize="16"
+                                    HorizontalAlignment="Center" Click="BekijkHighscore_Click"/>
+                        </Grid>
+
+                        <!-- Quiz Area - Improved -->
+                        <Border x:Name="QuizArea" Background="#f7f9ff" CornerRadius="18" 
+                                BorderBrush="#d8e0f0" BorderThickness="1" Padding="30,25" Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- Question Counter - Nieuwe toevoeging -->
+                                <TextBlock x:Name="QuestionCounter" Grid.Row="0" 
+                                           Style="{StaticResource QuestionCounterStyle}"
+                                           Text="Vraag 1 van 10" Visibility="Collapsed"/>
+
+                                <!-- Question Section -->
+                                <StackPanel Grid.Row="1" Margin="0,0,0,20">
+                                    <!-- Question Image -->
+                                    <Image x:Name="QuestionImage" Width="180" Height="180" 
+                                           Margin="0,0,0,15" Stretch="Uniform"
+                                           HorizontalAlignment="Center"
+                                           Visibility="Collapsed" />
+
+                                    <TextBlock x:Name="QuestionText" FontSize="22" FontWeight="SemiBold"
+                                               Foreground="#333" TextWrapping="Wrap" TextAlignment="Center"
+                                               Margin="0,5,0,0"/>
+                                </StackPanel>
+
+                                <!-- Answer Section -->
+                                <StackPanel Grid.Row="2" Margin="0,0,0,20" HorizontalAlignment="Center">
+                                    <TextBox x:Name="AnswerBox" Style="{StaticResource RoundedTextBoxStyle}" 
+                                             Width="180" Height="45" FontSize="20" TextAlignment="Center"/>
+
+                                    <Button x:Name="CheckAnswerButton" Content="Check Antwoord" Width="220" Height="45"
+                                            Margin="0,15,0,0" Style="{StaticResource RoundedButtonStyle}"
+                                            Click="CheckAnswer_Click"/>
+                                </StackPanel>
+
+                                <!-- Feedback Section -->
+                                <Border Grid.Row="3" BorderThickness="0,1,0,1" BorderBrush="#e0e0e0" 
+                                        Padding="0,15" Margin="0,0,0,15">
+                                    <TextBlock x:Name="FeedbackText" FontSize="18" 
+                                               Foreground="#333" TextWrapping="Wrap" TextAlignment="Center"/>
+                                </Border>
+
+                                <!-- Score Section -->
+                                <StackPanel Grid.Row="4">
+                                    <TextBlock x:Name="ScoreText" FontSize="20" 
+                                               Foreground="#333" TextWrapping="Wrap" TextAlignment="Center"
+                                               FontWeight="Bold"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Window>

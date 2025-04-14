@@ -1,0 +1,6 @@
+12,schijt
+6,highscore test
+3,tte
+2,SEMMY
+2,ttttttttttttt
+0,test
