@@ -215,7 +215,7 @@
                                    Margin="0,0,0,25" TextAlignment="Center"/>
 
                         <!-- Player Configuration Section -->
-                        <Border Background="#f7f9ff" CornerRadius="15" 
+                        <Border x:Name="ConfigurationPanel" Background="#f7f9ff" CornerRadius="15" 
                                 BorderBrush="#e0e0e0" BorderThickness="1" Padding="25,20" Margin="0,0,0,25">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -246,19 +246,20 @@
                         </Border>
 
                         <!-- Action Buttons - Improved layout -->
-                        <Grid Margin="0,0,0,25">
+                        <Grid x:Name="ActionPanel" Margin="0,0,0,25">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Button x:Name="StartStopButton" Grid.Column="0" Content="Start Oefening" Width="200" Height="50"
-                                    Style="{StaticResource RoundedButtonStyle}" FontSize="16"
-                                    HorizontalAlignment="Center" Click="StartStop_Click"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button x:Name="StartStopButton" Content="Start Oefening" Width="200" Height="50"
+                                 Style="{StaticResource RoundedButtonStyle}" FontSize="16"
+                                 HorizontalAlignment="Center" Margin="0,0,10,0" Click="StartStopButton_Click"/>
 
-                            <Button x:Name="HighscoreButton" Grid.Column="1" Content="Bekijk Highscore" Width="200" Height="50"
-                                    Style="{StaticResource SecondaryButtonStyle}" FontSize="16"
-                                    HorizontalAlignment="Center" Click="BekijkHighscore_Click"/>
+                                <Button x:Name="HighscoreButton" Content="Bekijk Highscore" Width="200" Height="50"
+                                 Style="{StaticResource SecondaryButtonStyle}" FontSize="16"
+                                 HorizontalAlignment="Center" Click="HighscoreButton_Click"/>
+                            </StackPanel>
                         </Grid>
 
                         <!-- Quiz Area - Improved -->
@@ -273,7 +274,7 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
-                                <!-- Question Counter - Nieuwe toevoeging -->
+                                <!-- Question Counter -->
                                 <TextBlock x:Name="QuestionCounter" Grid.Row="0" 
                                            Style="{StaticResource QuestionCounterStyle}"
                                            Text="Vraag 1 van 10" Visibility="Collapsed"/>
@@ -293,12 +294,33 @@
 
                                 <!-- Answer Section -->
                                 <StackPanel Grid.Row="2" Margin="0,0,0,20" HorizontalAlignment="Center">
-                                    <TextBox x:Name="AnswerBox" Style="{StaticResource RoundedTextBoxStyle}" 
-                                             Width="180" Height="45" FontSize="20" TextAlignment="Center"/>
-
+                                    <TextBox x:Name="AnswerBox" Width="180" Height="45" FontSize="20" TextAlignment="Center"
+         Padding="0" BorderThickness="2" BorderBrush="#de1c7e" Background="White" Foreground="#333">
+                                        <TextBox.Resources>
+                                            <Style TargetType="{x:Type TextBox}">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type TextBox}">
+                                                            <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="10" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                                                                <ScrollViewer x:Name="PART_ContentHost" 
+                                          Focusable="false" 
+                                          HorizontalScrollBarVisibility="Hidden" 
+                                          VerticalScrollBarVisibility="Hidden"
+                                          VerticalAlignment="Center"
+                                          Margin="8,0"/>
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </TextBox.Resources>
+                                    </TextBox>
                                     <Button x:Name="CheckAnswerButton" Content="Check Antwoord" Width="220" Height="45"
                                             Margin="0,15,0,0" Style="{StaticResource RoundedButtonStyle}"
-                                            Click="CheckAnswer_Click"/>
+                                            Click="CheckAnswerButton_Click"/>
                                 </StackPanel>
 
                                 <!-- Feedback Section -->
